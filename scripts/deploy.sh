@@ -28,7 +28,7 @@ docker compose pull
 
 # ── Sobe a nova versão ───────────────────────────────────────
 echo "[2/4] Iniciando nova versão..."
-docker compose up -d
+docker compose up -d || true
 
 # ── Aguarda o serviço estabilizar ────────────────────────────
 echo "[3/4] Aguardando health check ($((HEALTH_RETRIES * HEALTH_WAIT))s max)..."
@@ -54,7 +54,7 @@ else
     if [ "$PREVIOUS" != "none" ]; then
         echo "[ROLLBACK] Revertendo para: $PREVIOUS"
         docker compose down
-        IMAGE=$PREVIOUS docker compose up -d
+        YOLO_IMAGE=$PREVIOUS docker compose up -d
         echo "[ROLLBACK] Concluído. Serviço restaurado."
     else
         echo "[AVISO] Sem imagem anterior para rollback."
