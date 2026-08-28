@@ -30,12 +30,6 @@ jobs:
         uses: tailscale/github-action@v4
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-
-      - name: Testa conectividade com a Raspberry Pi
-        run: |
-          tailscale status
-          ping -c 3 100.85.154.26 || echo "PING FALHOU"
-          nc -zv -w5 100.85.154.26 22 || echo "PORTA 22 INACESSÍVEL"          
           
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
@@ -54,6 +48,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.RPI_SSH_KEY }}" | tr -d '\r' > ~/.ssh/dvc_key
           chmod 600 ~/.ssh/dvc_key
+          ssh-keyscan -H 100.85.154.26>> ~/.ssh/known_host
           dvc remote modify --local local_remote keyfile ~/.ssh/dvc_key
           dvc pull
 
@@ -154,6 +149,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.RPI_SSH_KEY }}" | tr -d '\r' > ~/.ssh/dvc_key
           chmod 600 ~/.ssh/dvc_key
+          ssh-keyscan -H 100.85.154.26 >> ~/.ssh/known_hosts 
           dvc remote modify --local local_remote keyfile ~/.ssh/dvc_key
           dvc pull
 
