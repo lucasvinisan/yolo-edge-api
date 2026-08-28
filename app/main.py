@@ -7,13 +7,12 @@ import time
 import uuid
 
 import cv2
-from fastapi import FastAPI, HTTPException, Query, Request, Response
-from fastapi.responses import HTMLResponse, StreamingResponse
 import httpx
 import numpy as np
-from PIL import Image
-
+from fastapi import FastAPI, HTTPException, Query, Request, Response
+from fastapi.responses import HTMLResponse, StreamingResponse
 from model import get_default_model_name, load_model
+from PIL import Image
 from schemas import (
     BatchPredictRequest,
     BatchPredictResponse,

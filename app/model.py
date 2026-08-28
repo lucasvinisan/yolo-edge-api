@@ -19,8 +19,11 @@ _cache: dict = {}
 
 def load_model(model_name: str) -> YOLO:
     """Carrega o modelo da primeira vez e mantém em cache."""
+    if not model_name.endswith(".pt"):
+        model_name = f"{model_name}.pt"
     if model_name not in _cache:
         model_path = MODELS_DIR / model_name
+
         if not model_path.exists():
             raise FileNotFoundError(
                 f"Modelo '{model_name}' não encontrado em {MODELS_DIR}. "
