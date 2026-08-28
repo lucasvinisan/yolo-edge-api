@@ -1,16 +1,19 @@
 import asyncio
 import base64
 import io
+import json
 import subprocess
 import time
+import uuid
 
 import cv2
 import httpx
 import numpy as np
 from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.responses import HTMLResponse, StreamingResponse
-from model import get_default_model_name, load_model
 from PIL import Image
+
+from model import get_default_model_name, load_model
 from schemas import (
     BatchPredictRequest,
     BatchPredictResponse,
@@ -21,8 +24,6 @@ from schemas import (
     PredictResponse,
 )
 
-import json
-import uuid
 
 def log_event(event: str, level: str = "INFO", **kwargs):
     """Emite um evento estruturado em JSON para stdout."""
