@@ -149,13 +149,6 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.RPI_SSH_KEY }}" | tr -d '\r' > ~/.ssh/dvc_key
           chmod 600 ~/.ssh/dvc_key
-    
-          echo "Aguardando conexão com a máquina lvsl (100.85.154.26)..."
-          for i in {1..10}; do
-             nc -z -w5 100.85.154.26 22 && break
-             echo "Tentativa $i falhou, tentando novamente em 3 segundos..."
-             sleep 3
-          done
 
           ssh-keyscan -H 100.85.154.26 >> ~/.ssh/known_hosts
           dvc remote modify --local local_remote keyfile ~/.ssh/dvc_key
