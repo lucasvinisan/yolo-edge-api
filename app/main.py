@@ -7,10 +7,10 @@ import time
 import uuid
 
 import cv2
-import httpx
-import numpy as np
 from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.responses import HTMLResponse, StreamingResponse
+import httpx
+import numpy as np
 from PIL import Image
 
 from model import get_default_model_name, load_model
