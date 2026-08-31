@@ -1,0 +1,16 @@
+names:
+- Capacete
+- Colete
+- Pessoa
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: epi-detection-rpi5-6q1f3-n2sla
+  url: https://universe.roboflow.com/lucas-vinicius-on3tq/epi-detection-rpi5-6q1f3-n2sla/dataset/1
+  version: 1
+  workspace: lucas-vinicius-on3tq
+train: train/images
+val: valid/images
+test: test/images
+
+
