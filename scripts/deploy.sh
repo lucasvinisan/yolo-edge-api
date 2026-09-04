@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-DEPLOY_PATH="${DEPLOY_PATH:-~/yolo-edge-api}"
+DEPLOY_PATH="${DEPLOY_PATH:-$HOME/yolo-edge-api}"
 HEALTH_URL="http://localhost:8000/health"
 HEALTH_RETRIES=6
 HEALTH_WAIT=10
@@ -26,7 +26,7 @@ echo "[INFO] Imagem atual: $PREVIOUS"
 echo "[1/4] Baixando nova imagem..."
 docker compose pull
 
-python3 -m dvc pull models/yolo-epi.pt
+python3 -m dvc pull 
 
 
 # ── Sobe a nova versão ───────────────────────────────────────
@@ -46,6 +46,7 @@ for i in $(seq 1 $HEALTH_RETRIES); do
 done
 
 # ── Avalia o resultado ───────────────────────────────────────
+
 if [ "$SUCCESS" = true ]; then
     echo "[4/4] Health check OK"
     NEW=$(docker inspect yolo-api --format '{{.Config.Image}}' 2>/dev/null)
