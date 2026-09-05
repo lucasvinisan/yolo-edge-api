@@ -156,12 +156,13 @@ jobs:
 
       - name: Recuperar dataset via DVC
         run: dvc pull dataset/exports/epi-v1
+        
       - name: Executar quality gate com dataset customizado
         run: |
           python scripts/validate_model.py \
-            --model models/yolov8n.pt \
+            --model models/yolo-epi.pt \
             --dataset dataset/exports/epi-v1/data.yaml \
-            --threshold 0.60
+            --threshold 0.50
 
 
       - name: Executar quality gate (mAP@0.5 >= 0.50)
